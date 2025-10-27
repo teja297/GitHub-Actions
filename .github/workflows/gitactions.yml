@@ -1,4 +1,4 @@
-name: Terraform Deploy (Dev VM)
+name: Deploy VM to Azure using Terraform
 
 on:
   push:
@@ -7,37 +7,42 @@ on:
 
 jobs:
   terraform:
-    name: "Terraform Apply"
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: Terraform/virtual_machine
-
+    
     steps:
+      # Checkout the code
       - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+        uses: actions/checkout@v2
+      
+      # Set up Terraform
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 1.9.8
+          terraform_version: '1.6.6'
+      
+      # Configure Azure login using Azure CLI (Azure credentials should be set as secrets in GitHub)
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Clear Azure CLI session (optional)
-        run: |
-          az account clear  # Clears any existing az login session
-
+      # Initialize Terraform
       - name: Terraform Init
-        run: terraform init
+        run: terraform -chdir=Terraform/virtual_machine init -input=false -no-color -reconfigure
 
+      # Validate Terraform files
+      - name: Terraform Validate
+        run: terraform -chdir=Terraform/virtual_machine validate -no-color
+
+      # Terraform Plan
       - name: Terraform Plan
-        run: terraform plan -out=tfplan
+        run: terraform -chdir=Terraform/virtual_machine plan -input=false -no-color
 
+      # Terraform Apply
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main'
-        run: terraform apply -auto-approve tfplan
-        env:
-          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+        run: terraform -chdir=Terraform/virtual_machine apply -auto-approve -input=false -no-color
+
+      # Clean up the environment (Optional)
+      - name: Terraform Destroy
+        if: ${{ always() }}
+        run: terraform -chdir=Terraform/virtual_machine destroy -auto-approve -input=false -no-color
