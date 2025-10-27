@@ -1,9 +1,41 @@
-name: Hello World Workflow
-'on':
-  - push
+name: Terraform Deploy (Dev VM)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Environment/Dev/virtual_machine/**'
+
 jobs:
-  say-hello:
+  terraform:
+    name: "Terraform Apply"
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: Environment/Dev/virtual_machine
+
     steps:
-      - name: Print Hello World
-        run: 'echo "Hello, World!"'
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.8
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main'
+        run: terraform apply -auto-approve tfplan
+        env:
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
