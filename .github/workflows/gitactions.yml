@@ -25,6 +25,10 @@ jobs:
         with:
           terraform_version: 1.9.8
 
+      - name: Clear Azure CLI session (optional)
+        run: |
+          az account clear
+
       - name: Debug Azure Environment Variables
         run: |
           echo "ARM_CLIENT_ID is set: ${ARM_CLIENT_ID}"
