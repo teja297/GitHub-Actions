@@ -46,4 +46,3 @@ jobs:
       - name: Terraform Destroy
         if: ${{ always() }}
         run: terraform -chdir=Terraform/virtual_machine destroy -auto-approve -input=false -no-color
-
