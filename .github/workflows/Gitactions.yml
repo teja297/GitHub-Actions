@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'Environment/Dev/virtual_machine/**'
+      - 'Terraform/virtual_machine/**'
 
 jobs:
   terraform:
