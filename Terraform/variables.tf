@@ -1,17 +1,24 @@
 variable "subscription_id" {
   description = "Azure subscription ID"
   type        = string
-  default     = "11111111-2222-3333-4444-555555555555"
+  default     = "d051b475-bd0f-4c97-a366-27c880ee5c45"
 }
 
 variable "client_id" {
   description = "Azure Service Principal App ID"
   type        = string
-  default     = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+  default     = "ae391762-9ba8-4cb3-8721-6b4c7bb6bcea"
+}
+
+
+variable "client_id" {
+  description = "Azure Service Principal App ID"
+  type        = string
+  default     = "ae391762-9ba8-4cb3-8721-6b4c7bb6bcea"
 }
 
 variable "client_secret" {
-  description = "Azure Service Principal password"
+  description = "e91cf59b-64d5-4c68-8cf5-7b5f9d91ac9d"
   type        = string
   default     = "your-super-secret-client-secret"
   sensitive   = true
@@ -20,13 +27,13 @@ variable "client_secret" {
 variable "tenant_id" {
   description = "Azure tenant ID"
   type        = string
-  default     = "fffffff1-2222-3333-4444-555555555555"
+  default     = "e91cf59b-64d5-4c68-8cf5-7b5f9d91ac9d"
 }
 
 variable "location" {
   description = "Azure region where resources will be created"
   type        = string
-  default     = "East US"
+  default     = "southindia"
 }
 
 variable "admin_username" {
