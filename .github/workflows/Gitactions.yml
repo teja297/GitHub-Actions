@@ -14,7 +14,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: Environment/Dev/virtual_machine
+        working-directory: Terraform/virtual_machine
 
     steps:
       - name: Checkout code
