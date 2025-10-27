@@ -23,6 +23,10 @@ jobs:
         with:
           terraform_version: 1.9.8
 
+      - name: Clear Azure CLI session (optional)
+        run: |
+          az account clear  # Clears any existing az login session
+
       - name: Terraform Init
         run: terraform init
 
