@@ -16,7 +16,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: Terraform/app_service_plan
+        working-directory: Terraform/AppService_plan
 
     steps:
       - name: Checkout code
