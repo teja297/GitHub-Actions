@@ -7,6 +7,7 @@ variable "storage_account_name" {
 variable "resource_group_name" {
   type        = string
   description = "Name of the resource group"
+  default = "rg-dev-app"
 }
 
 variable "location" {
