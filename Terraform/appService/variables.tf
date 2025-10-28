@@ -7,7 +7,7 @@ variable "resource_group_name" {
 variable "app_service_plan_name" {
   description = "Name of the App Service Plan"
   type        = string
-  default = "dev-app-plan"
+  default = "my-app-service-plan"
 }
 
 variable "app_service_name" {
