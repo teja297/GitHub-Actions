@@ -1,7 +1,7 @@
 variable "resource_group_name" {
   description = "Name of the resource group"
   type        = string
-  default = "rg-dev-app"
+  default = "webpulse-dev1028"
 }
 
 variable "app_service_plan_name" {
