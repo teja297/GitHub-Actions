@@ -1,4 +1,4 @@
-name: Deploy App Service Plan
+name: Deploy Secure Infra
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  app_service_plan:
+  app_service:
     runs-on: ubuntu-latest
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
@@ -16,7 +16,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: Terraform/AppService_plan
+        working-directory: Terraform/app_service
 
     steps:
       - name: Checkout code
@@ -35,12 +35,10 @@ jobs:
           client_secret          = "${{ secrets.AZURE_CLIENT_SECRET }}"
           tenant_id              = "${{ secrets.AZURE_TENANT_ID }}"
           location               = "southindia"
-          resource_group_name    = "rg-dev-app"
-          app_service_plan_name  = "dev-app-plan"
-          kind                   = "Linux"
-          reserved               = true
-          sku_tier               = "Basic"
-          sku_size               = "B1"
+          # resource_group_name    = "rg-dev-app"
+          # app_service_plan_name  = "dev-app-plan"
+          # app_service_name       = "my-web-app"
+          # linux_fx_version       = "PYTHON|3.10"
           environment            = "dev"
           EOF
 
@@ -55,6 +53,56 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve -input=false -no-color
+
+  # app_service_plan:
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  #     ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+  #     ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  #     ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+
+  #   defaults:
+  #     run:
+  #       working-directory: Terraform/AppService_plan
+
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
+
+  #     - name: Set up Terraform
+  #       uses: hashicorp/setup-terraform@v1
+  #       with:
+  #         terraform_version: '1.6.6'
+
+  #     - name: Create terraform.tfvars
+  #       run: |
+  #         cat <<EOF > terraform.tfvars
+  #         subscription_id        = "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+  #         client_id              = "${{ secrets.AZURE_CLIENT_ID }}"
+  #         client_secret          = "${{ secrets.AZURE_CLIENT_SECRET }}"
+  #         tenant_id              = "${{ secrets.AZURE_TENANT_ID }}"
+  #         location               = "southindia"
+  #         resource_group_name    = "rg-dev-app"
+  #         app_service_plan_name  = "dev-app-plan"
+  #         kind                   = "Linux"
+  #         reserved               = true
+  #         sku_tier               = "Basic"
+  #         sku_size               = "B1"
+  #         environment            = "dev"
+  #         EOF
+
+  #     - name: Terraform Init
+  #       run: terraform init -input=false -no-color -reconfigure
+
+  #     - name: Terraform Validate
+  #       run: terraform validate -no-color
+
+  #     - name: Terraform Plan
+  #       run: terraform plan -input=false -no-color
+
+  #     - name: Terraform Apply
+  #       run: terraform apply -auto-approve -input=false -no-color
 
   # resource_group:
   #   runs-on: ubuntu-latest
