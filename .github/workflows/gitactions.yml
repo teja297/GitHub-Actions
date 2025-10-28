@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'Terraform/resource_group/**'  # Only trigger when files in this folder change
+      - 'Terraform/virtual_network/**'  # Only trigger when files in this folder change
 
 jobs:
   terraform:
