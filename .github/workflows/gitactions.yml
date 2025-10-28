@@ -84,7 +84,7 @@ jobs:
           client_id              = "${{ secrets.AZURE_CLIENT_ID }}"
           client_secret          = "${{ secrets.AZURE_CLIENT_SECRET }}"
           tenant_id              = "${{ secrets.AZURE_TENANT_ID }}"
-          # location               = "southindia"
+          location               = "East US"
           # resource_group_name    = "rg-dev-app"
           # app_service_plan_name  = "dev-app-plan"
           # kind                   = "Linux"
