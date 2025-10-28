@@ -94,7 +94,6 @@ jobs:
           sku_size = "S1"
           EOF
 
-
       - name: Terraform Init
         run: terraform init -input=false -no-color -reconfigure
 
