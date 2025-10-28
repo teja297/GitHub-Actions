@@ -19,7 +19,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: Terraform/virtual_machine
+        working-directory: Terraform/resource_group
 
     steps:
       - name: Checkout code
