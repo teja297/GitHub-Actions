@@ -1,7 +1,4 @@
-resource "azurerm_resource_group" "rg" {
-  name     = "rg-terraform-backend"
-  location = var.location
-}
+
 
 resource "azurerm_virtual_network" "vnet" {
   name                = "test-vnet"
