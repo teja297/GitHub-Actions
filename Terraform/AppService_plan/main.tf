@@ -13,3 +13,4 @@ resource "azurerm_app_service_plan" "example" {
  }
 }
 
+
