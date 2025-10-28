@@ -8,6 +8,7 @@ on:
 jobs:
   app_service:
     runs-on: ubuntu-latest
+    needs: [resource_group, app_service_plan]
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
@@ -56,6 +57,7 @@ jobs:
 
   app_service_plan:
     runs-on: ubuntu-latest
+    needs: resource_group
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
@@ -150,6 +152,7 @@ jobs:
 
   virtual_network:
     runs-on: ubuntu-latest
+    needs: resource_group
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
@@ -195,6 +198,7 @@ jobs:
 
   storage_account:
     runs-on: ubuntu-latest
+    needs: resource_group
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
