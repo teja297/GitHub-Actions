@@ -85,13 +85,13 @@ jobs:
           client_id              = "${{ secrets.AZURE_CLIENT_ID }}"
           client_secret          = "${{ secrets.AZURE_CLIENT_SECRET }}"
           tenant_id              = "${{ secrets.AZURE_TENANT_ID }}"
-          location               = "southindia"
+          location               = "centralindia"
           resource_group_name    = "rg-dev-app"
           app_service_plan_name  = "dev-app-plan"
           kind                   = "Linux"
           reserved               = true
           sku_tier               = "Basic"
-          sku_size               = "B1"
+          sku_size = "S1"
           EOF
 
 
