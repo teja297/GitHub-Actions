@@ -1,7 +1,7 @@
 variable "resource_group_name" {
   description = "Name of the resource group"
   type        = string
-  default = "webpulse-dev1028"
+  default = "rg-dev-app"
 }
 
 variable "app_service_plan_name" {
@@ -13,7 +13,7 @@ variable "app_service_plan_name" {
 variable "app_service_name" {
   description = "Name of the App Service (Web App)"
   type        = string
-  default     = "my-web-app"
+  default     = "webpulse-dev1028"
 }
 
 variable "linux_fx_version" {
