@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'Terraform/resource_group/**'  # Only trigger when files in this folder change
 
 jobs:
   terraform:
@@ -14,6 +16,10 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+
+    defaults:
+      run:
+        working-directory: Terraform/virtual_machine
 
     steps:
       - name: Checkout code
@@ -26,7 +32,7 @@ jobs:
 
       - name: Create terraform.tfvars
         run: |
-          cat <<EOF > Terraform/virtual_machine/terraform.tfvars
+          cat <<EOF > terraform.tfvars
           subscription_id = "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
           client_id       = "${{ secrets.AZURE_CLIENT_ID }}"
           client_secret   = "${{ secrets.AZURE_CLIENT_SECRET }}"
@@ -37,17 +43,17 @@ jobs:
           EOF
 
       - name: Terraform Init
-        run: terraform -chdir=Terraform/virtual_machine init -input=false -no-color -reconfigure
+        run: terraform init -input=false -no-color -reconfigure
 
       - name: Terraform Validate
-        run: terraform -chdir=Terraform/virtual_machine validate -no-color
+        run: terraform validate -no-color
 
       - name: Terraform Plan
-        run: terraform -chdir=Terraform/virtual_machine plan -input=false -no-color
+        run: terraform plan -input=false -no-color
 
       - name: Terraform Apply
-        run: terraform -chdir=Terraform/virtual_machine apply -auto-approve -input=false -no-color
+        run: terraform apply -auto-approve -input=false -no-color
 
-      - name: Terraform Destroy
-        if: ${{ always() }}
-        run: terraform -chdir=Terraform/virtual_machine destroy -auto-approve -input=false -no-color
+      # - name: Terraform Destroy
+      #   if: ${{ always() }}
+      #   run: terraform destroy -auto-approve -input=false -no-color
