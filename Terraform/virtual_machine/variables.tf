@@ -4,6 +4,12 @@ variable "subscription_id" {
   default = "d051b475-bd0f-4c97-a366-27c880ee5c45"
 }
 
+variable "resource_group_name" {
+  description = "Name of the existing Azure resource group"
+  type        = string
+  default     = "rg-terraform-backend"
+}
+
 variable "client_id" {
   description = "Azure client ID (Application ID)"
   type        = string
