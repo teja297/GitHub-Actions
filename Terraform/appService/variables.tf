@@ -24,17 +24,17 @@ variable "linux_fx_version" {
 
 #--------------plan variables---------------------------
 
-variable "resource_group_name" {
-  description = "Name of the existing resource group"
-  type        = string
-  default = "rg-dev-app"
-}
+# variable "resource_group_name" {
+#   description = "Name of the existing resource group"
+#   type        = string
+#   default = "rg-dev-app"
+# }
 
-variable "app_service_plan_name" {
-  description = "Name of the App Service Plan"
-  type        = string
-  default     = "my-app-service-plan"
-}
+# variable "app_service_plan_name" {
+#   description = "Name of the App Service Plan"
+#   type        = string
+#   default     = "my-app-service-plan"
+# }
 
 # variable "kind" {
 #   description = "Type of App Service (Windows or Linux)"
