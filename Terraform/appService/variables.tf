@@ -23,6 +23,7 @@ variable "linux_fx_version" {
 }
 
 
+
 #--------------plan variables---------------------------
 
 # variable "resource_group_name" {

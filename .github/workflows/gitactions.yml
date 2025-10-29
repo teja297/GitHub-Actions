@@ -208,7 +208,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: Terraform/storage_account
+        working-directory: Terraform/virtual_machine01
 
     steps:
       - name: Checkout code
