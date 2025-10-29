@@ -22,6 +22,7 @@ variable "linux_fx_version" {
   default     = "PYTHON|3.10"
 }
 
+
 #--------------plan variables---------------------------
 
 # variable "resource_group_name" {
