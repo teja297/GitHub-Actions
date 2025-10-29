@@ -197,7 +197,7 @@ jobs:
   #     - name: Terraform Apply
   #       run: terraform apply -auto-approve -input=false -no-color
 
-  storage_account:
+  virtual_machine:
     runs-on: ubuntu-latest
     # needs: resource_group
     env:

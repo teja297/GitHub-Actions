@@ -67,8 +67,8 @@ variable "admin_username" {
   default     = "adminuser"
 }
 
-variable "admin_ssh_public_key_path" {
-  description = "Path to the public SSH key for VM authentication"
+variable "admin_password" {
+  description = "pssword for the authecation"
   type        = string
-  default     = "~/.ssh/id_rsa.pub"
+  default     = "Teja12345678"
 }
