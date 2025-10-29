@@ -199,7 +199,7 @@ jobs:
 
   storage_account:
     runs-on: ubuntu-latest
-    needs: resource_group
+    # needs: resource_group
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
